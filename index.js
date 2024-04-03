@@ -22,10 +22,16 @@ app.get('/:id', async(req, res)=>{
         // left join filiais f on e.id = f.empresa_id;
         // `
 
+        // const query = `
+        // select e.id as empresaId, f.id as filialId, e.nome, f.pais
+        // from empresas e 
+        // right join filiais f on e.id = f.empresa_id;
+        // `
+
         const query = `
         select e.id as empresaId, f.id as filialId, e.nome, f.pais
         from empresas e 
-        right join filiais f on e.id = f.empresa_id;
+        full join filiais f on e.id = f.empresa_id;
         `
 
         const resultado = await pool.query(query)
