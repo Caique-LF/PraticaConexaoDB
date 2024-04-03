@@ -9,11 +9,23 @@ app.get('/:id', async(req, res)=>{
    
    try {
 
+        // const query = `
+        // select e.id as empresaId, f.id as filialId, e.nome, f.pais, p.nome as Funcionario
+        // from empresas e 
+        // join filiais f on e.id = f.empresa_id
+        // join pessoas p on e.id = p.empresa_id;
+        // `
+
+        // const query = `
+        // select e.id as empresaId, f.id as filialId, e.nome, f.pais
+        // from empresas e 
+        // left join filiais f on e.id = f.empresa_id;
+        // `
+
         const query = `
-        select e.id as empresaId, f.id as filialId, e.nome, f.pais, p.nome as Funcionario
+        select e.id as empresaId, f.id as filialId, e.nome, f.pais
         from empresas e 
-        join filiais f on e.id = f.empresa_id
-        join pessoas p on e.id = p.empresa_id;
+        right join filiais f on e.id = f.empresa_id;
         `
 
         const resultado = await pool.query(query)
